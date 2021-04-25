@@ -22,7 +22,6 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.tech.stockspickertracker.Adapter.StockRecAdapter;
-import com.tech.stockspickertracker.Helper.AlarmHelper;
 import com.tech.stockspickertracker.Model.TickerDatabase;
 import com.tech.stockspickertracker.Model.TickerModel;
 import com.tech.stockspickertracker.Network.APIService;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements StockRecAdapter.D
         adapter.setTickers();
         initViews();
 
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         mTickerDatabase = TickerDatabase.getInstance(this);
 
         if(mTickerDatabase.tickerDao().getAllTickers().size()!=0){
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements StockRecAdapter.D
         mSearchView.setSuggestionsAdapter(cursorAdapter);
 
         Log.d(TAG, "searchCode: search view"+mSearchView);
-        mSearchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d(TAG, "onQueryTextSubmit: searchText"+searchText);
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements StockRecAdapter.D
         });
 
         // Listening to user selecting from suggestions list
-        mSearchView.setOnSuggestionListener(new androidx.appcompat.widget.SearchView.OnSuggestionListener() {
+        mSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int position) {
                 Cursor cursor = (Cursor) mSearchView.getSuggestionsAdapter().getItem(position);
@@ -171,7 +170,10 @@ public class MainActivity extends AppCompatActivity implements StockRecAdapter.D
                 }
                 startActivity(intent);
                 cursor.close();
+
                 mSearchView.setIconified(true);
+
+
                 return true;
             }
 
@@ -221,7 +223,6 @@ public class MainActivity extends AppCompatActivity implements StockRecAdapter.D
         mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         mRecyclerView.setAdapter(adapter);
         mTextView = findViewById(R.id.txtEmptyMessage);
-
     }
 
 
@@ -230,14 +231,6 @@ public class MainActivity extends AppCompatActivity implements StockRecAdapter.D
         if (mTickerDatabase.tickerDao().getAllTickers().size() == 0) {
             mTextView.setVisibility(View.VISIBLE);
         }
-
     }
-
-    @Override
-    public void cancelAlarm(int id) {
-        AlarmHelper.cancelAlarm(getBaseContext(), id);
-    }
-
-
 
 }

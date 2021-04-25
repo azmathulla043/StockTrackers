@@ -3,11 +3,14 @@ package com.tech.stockspickertracker.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 
@@ -57,10 +60,13 @@ public class StockDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         TickerDatabase db = TickerDatabase.getInstance(this);
         setContentView(R.layout.activity_stock_details);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        final ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
         initViews();
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      /* setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         StockDetailPagerAdapter adapter = new StockDetailPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, this);
 
@@ -213,6 +219,22 @@ public class StockDetailActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home_none, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (android.R.id.home == item.getItemId()) // API 5+ solution
+        {
+            finish();//  onBackPressed();
+        }
         return true;
     }
 

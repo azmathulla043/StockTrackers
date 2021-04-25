@@ -27,7 +27,9 @@
                 app:menu="@menu/main_tootlbar"
                 android:id="@+id/toolBar"
                 android:background="@color/redAccentPrimary"
-                android:nestedScrollingEnabled="true"/>
+                android:nestedScrollingEnabled="true"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:id="@+id/txtEmptyMessage"

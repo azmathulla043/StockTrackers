@@ -15,7 +15,8 @@
         android:theme="@style/SearchViewStyle"
         android:background="@color/redAccentPrimary"
         app:titleTextColor="@color/colorWhiteLight"
-        android:id="@+id/toolBar"/>
+        android:id="@+id/toolBar"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"

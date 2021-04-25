@@ -20,7 +20,6 @@
         </activity>
     <activity android:name=".UI.StockDetailActivity" />
     <activity android:name=".UI.MainActivity"/>
-    <receiver android:name=".Helper.AlertReceiver"/>
     </application>
 
 </manifest>
